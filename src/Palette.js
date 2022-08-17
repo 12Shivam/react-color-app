@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from './withRouter';
 import { generatePalette } from './colorHelper';
-import seedColors from './seedColors';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import './Palette.css';
@@ -16,7 +15,7 @@ class Palette extends Component {
   }
 
   findPalette(id) {
-    return seedColors.find(p => p.id === id);
+    return this.props.palettes.find(p => p.id === id);
   }
 
   changeLevel(level) {
