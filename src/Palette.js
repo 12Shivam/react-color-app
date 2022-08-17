@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from './withRouter';
+import { generatePalette } from './colorHelper';
+import seedColors from './seedColors';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import './Palette.css';
@@ -7,8 +10,13 @@ class Palette extends Component {
   constructor(props) {
     super(props);
     this.state = { level: 500, format: 'hex' };
+    this.palette = generatePalette(this.findPalette(this.props.params.id));
     this.changeLevel = this.changeLevel.bind(this);
     this.changeFormat = this.changeFormat.bind(this);
+  }
+
+  findPalette(id) {
+    return seedColors.find(p => p.id === id);
   }
 
   changeLevel(level) {
@@ -20,7 +28,7 @@ class Palette extends Component {
   }
 
   render() {
-    const { colors, emoji, paletteName } = this.props.palette;
+    const { colors, emoji, paletteName } = this.palette;
     const { level, format } = this.state;
     const colorBoxes = colors[level].map(color => (
       <ColorBox background={color[format]} name={color.name} key={color.id} />
@@ -42,4 +50,4 @@ class Palette extends Component {
   }
 }
 
-export default Palette;
+export default withRouter(Palette);

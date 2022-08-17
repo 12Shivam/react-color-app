@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Palette from './Palette';
-import seedColors from './seedColors';
-import { generatePalette } from './colorHelper';
 
 class App extends Component {
   render() {
@@ -10,14 +8,11 @@ class App extends Component {
       <Routes>
         <Route path='/'>
           <Route index={true} />
-          <Route path='palette/:id' />
+          <Route path='palette/:id' element={<Palette />} />
         </Route>
         <Route path='*' element={<Navigate to='/' replace={true} />} />
       </Routes>
     );
-    //   <div className='App'>
-    //     <Palette palette={generatePalette(seedColors[4])} />
-    //   </div>;
   }
 }
 
