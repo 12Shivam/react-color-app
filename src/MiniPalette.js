@@ -56,7 +56,7 @@ export default function MiniPalette(props) {
   ));
 
   return (
-    <Box sx={styleSX.root}>
+    <Box sx={styleSX.root} onClick={props.handleClick}>
       <Box sx={styleSX.colors}>{miniColorBoxes}</Box>
       <Box component='h5' sx={styleSX.title}>
         {paletteName}

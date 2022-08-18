@@ -4,13 +4,13 @@ export function withRouter(Children) {
   return props => {
     const params = useParams(),
       location = useLocation(),
-      history = useNavigate();
+      navigate = useNavigate();
     return (
       <Children
         {...props}
         params={params}
         location={location}
-        history={history}
+        navigate={navigate}
       />
     );
   };

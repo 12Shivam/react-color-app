@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MiniPalette from './MiniPalette';
+import { withRouter } from './withRouter';
 import { Box } from '@mui/system';
 
 const styleSX = {
@@ -33,6 +34,9 @@ const styleSX = {
 };
 
 class PaletteList extends Component {
+  // goToPalette(id) {
+  //   this.props.navigate(`/palette/${id}`);
+  // }
   render() {
     const { palettes } = this.props;
     return (
@@ -43,7 +47,13 @@ class PaletteList extends Component {
           </Box>
           <Box sx={styleSX.palettes}>
             {palettes.map(palette => (
-              <MiniPalette {...palette} />
+              <MiniPalette
+                {...palette}
+                handleClick={() =>
+                  // this.goToPalette(palette.id);
+                  this.props.navigate(`/palette/${palette.id}`)
+                }
+              />
             ))}
           </Box>
         </Box>
@@ -52,4 +62,4 @@ class PaletteList extends Component {
   }
 }
 
-export default PaletteList;
+export default withRouter(PaletteList);
