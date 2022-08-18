@@ -49,7 +49,10 @@ const styleSX = {
 export default function MiniPalette(props) {
   const { paletteName, emoji, colors } = props;
   const miniColorBoxes = colors.map(color => (
-    <Box sx={styleSX.miniColor} key={color.name} />
+    <Box
+      sx={{ backgroundColor: color.color, ...styleSX.miniColor }}
+      key={color.name}
+    />
   ));
 
   return (
