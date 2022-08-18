@@ -14,6 +14,10 @@ class App extends Component {
             path='palette/:id'
             element={<Palette palettes={seedColors} />}
           />
+          <Route
+            path='palette/:paletteId/:colorId'
+            render={() => <h1>SINGLE COLOR PAGE!</h1>}
+          />
         </Route>
         <Route path='*' element={<Navigate to='/' replace={true} />} />
       </Routes>
