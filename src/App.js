@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
+import SingleColorPalette from './SingleColorPalette';
 import seedColors from './seedColors';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
           />
           <Route
             path='palette/:paletteId/:colorId'
-            render={() => <h1>SINGLE COLOR PAGE!</h1>}
+            element={<SingleColorPalette palettes={seedColors} />}
           />
         </Route>
         <Route path='*' element={<Navigate to='/' replace={true} />} />

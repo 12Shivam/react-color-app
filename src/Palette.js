@@ -9,7 +9,7 @@ class Palette extends Component {
   constructor(props) {
     super(props);
     this.state = { level: 500, format: 'hex' };
-    this.palette = generatePalette(this.findPalette(this.props.params.id));
+    this._palette = generatePalette(this.findPalette(this.props.params.id));
     this.changeLevel = this.changeLevel.bind(this);
     this.changeFormat = this.changeFormat.bind(this);
   }
@@ -27,10 +27,18 @@ class Palette extends Component {
   }
 
   render() {
-    const { colors, emoji, paletteName } = this.palette;
+    const { colors, emoji, paletteName } = this._palette;
+    const paletteId = this.props.params.id;
     const { level, format } = this.state;
     const colorBoxes = colors[level].map(color => (
-      <ColorBox background={color[format]} name={color.name} key={color.id} />
+      <ColorBox
+        background={color[format]}
+        name={color.name}
+        key={color.id}
+        id={color.id}
+        paletteId={paletteId}
+        showLink
+      />
     ));
     return (
       <div className='Palette'>
