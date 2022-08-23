@@ -1,12 +1,13 @@
 import React from 'react';
+import useStyles from './styles/PaletteFooterStyles';
 
 export default function PaletteFooter(props) {
   const { emoji, paletteName } = props;
-
+  const classes = useStyles();
   return (
-    <footer className='Palette-footer'>
+    <footer className={classes.PaletteFooter}>
       {paletteName}
-      <span className='emoji'>{emoji}</span>
+      <span className={classes.emoji}>{emoji}</span>
     </footer>
   );
 }

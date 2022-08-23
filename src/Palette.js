@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from './withRouter';
 import { generatePalette } from './colorHelper';
+import withStyles from 'react-jss';
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
-import withStyles from 'react-jss';
-import './Palette.css';
-
-const styles = {
-  Palette: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  colors: {
-    height: '90%',
-  },
-};
+import styles from './styles/PaletteStyles';
 
 class Palette extends Component {
   constructor(props) {
