@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
+import NewPaletteForm from './NewPaletteForm';
 import seedColors from './seedColors';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
       <Routes>
         <Route path='/'>
           <Route index={true} element={<PaletteList palettes={seedColors} />} />
+          <Route path='palette/new' element={<NewPaletteForm />} />
           <Route
             path='palette/:id'
             element={<Palette palettes={seedColors} />}

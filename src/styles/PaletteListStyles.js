@@ -1,10 +1,15 @@
 const styles = {
   root: {
     backgroundColor: 'blue',
-    height: '100%',
+    height: '100vh',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    overflow: 'scroll',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   container: {
     width: '50%',
@@ -17,7 +22,12 @@ const styles = {
     display: 'flex',
     width: '100%',
     justifyContent: 'space-between',
+    alignItems: 'center',
     color: 'white',
+    '& a': {
+      color: 'white',
+      textUnderlineOffset: '6px',
+    },
   },
   palettes: {
     boxSizing: 'border-box',
