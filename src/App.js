@@ -25,7 +25,12 @@ class App extends Component {
           <Route index={true} element={<PaletteList palettes={palettes} />} />
           <Route
             path='palette/new'
-            element={<NewPaletteForm savePalette={this.savePalette} />}
+            element={
+              <NewPaletteForm
+                savePalette={this.savePalette}
+                palettes={palettes}
+              />
+            }
           />
           <Route path='palette/:id' element={<Palette palettes={palettes} />} />
           <Route
