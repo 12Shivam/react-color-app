@@ -16,7 +16,7 @@ import DraggableColorBox from './DraggableColorBox';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
 
-const drawerWidth = 400;
+const drawerWidth = 300;
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -154,18 +154,24 @@ class NewPaletteForm extends Component {
               Create a Palette
             </Typography>
             <ValidatorForm onSubmit={this.handleSubmit}>
-              <TextValidator
-                label='Palette Name'
-                value={this.state.newPaletteName}
-                name='newPaletteName'
-                onChange={this.handleChange}
-                validators={['required', 'isPaletteNameUnique']}
-                errorMessages={['Enter a color name', 'Name already used']}
-                variant='filled'
-              />
-              <Button variant='contained' color='primary' type='submit'>
-                Save Palette
-              </Button>
+              <div
+                style={{
+                  display: 'flex',
+                }}
+              >
+                <TextValidator
+                  label='Palette Name'
+                  value={this.state.newPaletteName}
+                  name='newPaletteName'
+                  onChange={this.handleChange}
+                  validators={['required', 'isPaletteNameUnique']}
+                  errorMessages={['Enter a color name', 'Name already used']}
+                  variant='filled'
+                />
+                <Button variant='contained' color='primary' type='submit'>
+                  Save Palette
+                </Button>
+              </div>
             </ValidatorForm>
           </Toolbar>
         </AppBar>
@@ -203,6 +209,7 @@ class NewPaletteForm extends Component {
           />
           <ValidatorForm onSubmit={this.addNewColor}>
             <TextValidator
+              style={{ display: 'inline' }}
               value={newColorName}
               name='newColorName'
               onChange={this.handleChange}
