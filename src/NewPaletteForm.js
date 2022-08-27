@@ -10,8 +10,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Button from '@mui/material/Button';
+import { ChromePicker } from 'react-color';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -63,6 +65,7 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: false,
+      color: 'yellow',
     };
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -74,9 +77,22 @@ class NewPaletteForm extends Component {
   handleDrawerClose() {
     this.setState({ open: false });
   }
+  handleChangeComplete = color => {
+    const { hex, hexa, rgb, rgba } = this.extractColors(color);
+    this.setState({ color: hexa });
+  };
+  extractColors(color) {
+    let { r, g, b, a } = color.rgb;
+    let { hex } = color;
+    let rgb = `rgb(${r},${g},${b})`;
+    let rgba = `rgba(${r},${g},${b},${a})`;
+    let alphaInHex = ((a * 255) | (1 << 8)).toString(16).slice(1);
+    let hexa = `${color.hex}${alphaInHex}`.toUpperCase();
+    return { hex, hexa, rgb, rgba };
+  }
 
   render() {
-    const { open } = this.state;
+    const { open, color } = this.state;
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -115,6 +131,22 @@ class NewPaletteForm extends Component {
             </IconButton>
           </DrawerHeader>
           <Divider />
+          <Typography variant='h4'>Design Your Palette</Typography>
+          <Box>
+            <Button variant='contained' color='error'>
+              Clear Palette
+            </Button>
+            <Button variant='contained' color='primary'>
+              Random Color
+            </Button>
+          </Box>
+          <ChromePicker
+            color={color}
+            onChangeComplete={this.handleChangeComplete}
+          />
+          <Button variant='contained' color='primary'>
+            Add Colors
+          </Button>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
