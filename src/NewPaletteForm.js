@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Button from '@mui/material/Button';
 import { ChromePicker } from 'react-color';
+import { colors } from '@mui/material';
 
 const drawerWidth = 400;
 
@@ -64,11 +65,14 @@ class NewPaletteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      color: 'yellow',
+      open: true,
+      currentColor: 'teal',
+      colors: ['purple', '#e15764'],
     };
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.addNewColor = this.addNewColor.bind(this);
   }
 
   handleDrawerOpen() {
@@ -77,22 +81,18 @@ class NewPaletteForm extends Component {
   handleDrawerClose() {
     this.setState({ open: false });
   }
-  handleChangeComplete = color => {
-    const { hex, hexa, rgb, rgba } = this.extractColors(color);
-    this.setState({ color: hexa });
-  };
-  extractColors(color) {
-    let { r, g, b, a } = color.rgb;
-    let { hex } = color;
-    let rgb = `rgb(${r},${g},${b})`;
-    let rgba = `rgba(${r},${g},${b},${a})`;
-    let alphaInHex = ((a * 255) | (1 << 8)).toString(16).slice(1);
-    let hexa = `${color.hex}${alphaInHex}`.toUpperCase();
-    return { hex, hexa, rgb, rgba };
+  updateCurrentColor(newColor) {
+    let alpha = ((newColor.rgb.a * 255) | (1 << 8)).toString(16).slice(1);
+    let hexa = `${newColor.hex}${alpha}`.toUpperCase();
+    this.setState({ currentColor: hexa });
+  }
+
+  addNewColor() {
+    this.setState({ colors: [...this.state.colors, this.state.currentColor] });
   }
 
   render() {
-    const { open, color } = this.state;
+    const { open, currentColor, colors } = this.state;
     return (
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
@@ -141,15 +141,27 @@ class NewPaletteForm extends Component {
             </Button>
           </Box>
           <ChromePicker
-            color={color}
-            onChangeComplete={this.handleChangeComplete}
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
           />
-          <Button variant='contained' color='primary'>
+          <Button
+            variant='contained'
+            sx={{
+              backgroundColor: currentColor,
+              ':hover': { backgroundColor: currentColor },
+            }}
+            onClick={this.addNewColor}
+          >
             Add Colors
           </Button>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
+          <ul>
+            {colors.map(color => (
+              <li style={{ backgroundColor: color }}>{color}</li>
+            ))}
+          </ul>
         </Main>
       </Box>
     );
