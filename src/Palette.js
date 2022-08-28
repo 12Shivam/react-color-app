@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from './withRouter';
 import { generatePalette } from './colorHelper';
+import withStyles from 'react-jss';
 import Navbar from './Navbar';
 import ColorBox from './ColorBox';
 import PaletteFooter from './PaletteFooter';
-import './Palette.css';
+import styles from './styles/PaletteStyles';
 
 class Palette extends Component {
   constructor(props) {
@@ -28,7 +29,8 @@ class Palette extends Component {
   }
 
   render() {
-    const { colors, emoji, paletteName } = this._palette;
+    const { classes } = this.props;
+    const { colors, paletteName, emoji } = this._palette;
     const paletteId = this.props.params.id;
     const { level, format } = this.state;
     const colorBoxes = colors[level].map(color => (
@@ -38,22 +40,22 @@ class Palette extends Component {
         key={color.id}
         id={color.id}
         paletteId={paletteId}
-        showLink
+        showingFullPalette
       />
     ));
     return (
-      <div className='Palette'>
+      <div className={classes.Palette}>
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
           showingAllColors
         />
-        <div className='Palette-colors'>{colorBoxes}</div>
+        <div className={classes.colors}>{colorBoxes}</div>
         <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     );
   }
 }
 
-export default withRouter(Palette);
+export default withStyles(styles)(withRouter(Palette));

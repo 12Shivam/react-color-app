@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withStyles } from 'react-jss';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Slider from 'rc-slider';
+
+import styles from './styles/NavbarStyles';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
 
 class Navbar extends Component {
   constructor(props) {
@@ -27,17 +29,17 @@ class Navbar extends Component {
   }
 
   render() {
-    const { level, changeLevel, showingAllColors } = this.props;
+    const { level, changeLevel, showingAllColors, classes } = this.props;
     const { format } = this.state;
     return (
-      <header className='Navbar'>
-        <div className='logo'>
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to='/'>reactcolorpicker</Link>
         </div>
         {showingAllColors && (
-          <div className='slider-container'>
+          <div>
             <span>Level: {level}</span>
-            <div className='slider'>
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -48,7 +50,8 @@ class Navbar extends Component {
             </div>
           </div>
         )}
-        <div className='select-container'>
+
+        <div className={classes.selectContainer}>
           <Select
             variant='standard'
             value={format}
@@ -89,4 +92,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
