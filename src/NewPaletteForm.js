@@ -133,6 +133,11 @@ class NewPaletteForm extends Component {
     this.props.savePalette(newPalette);
     this.props.navigate('/', { replace: true });
   }
+  removeColor(colorName) {
+    this.setState({
+      colors: this.state.colors.filter(color => color.name !== colorName),
+    });
+  }
 
   render() {
     const { open, currentColor, colors, newColorName } = this.state;
@@ -205,7 +210,7 @@ class NewPaletteForm extends Component {
           </Box>
           <ChromePicker
             color={currentColor}
-            onChangeComplete={this.updateCurrentColor}
+            onChange={this.updateCurrentColor}
           />
           <ValidatorForm onSubmit={this.addNewColor}>
             <TextValidator
@@ -236,7 +241,12 @@ class NewPaletteForm extends Component {
         <Main open={open}>
           <DrawerHeader />
           {colors.map(color => (
-            <DraggableColorBox color={color.color} name={color.name} />
+            <DraggableColorBox
+              key={color.name}
+              color={color.color}
+              name={color.name}
+              handleClick={() => this.removeColor(color.name)}
+            />
           ))}
         </Main>
       </Box>
