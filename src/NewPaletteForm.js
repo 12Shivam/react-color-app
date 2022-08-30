@@ -13,8 +13,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Button from '@mui/material/Button';
 import DraggableColorList from './DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
+import styles from './styles/NewPaletteFormStyles';
+import { DRAWER_WIDTH } from './constants';
 
-const drawerWidth = 300;
+const drawerWidth = DRAWER_WIDTH;
 
 const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -44,22 +46,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
-
-const styles = {
-  container: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttons: {
-    width: '90%',
-  },
-  button: {
-    width: '50%',
-  },
-};
 
 class NewPaletteForm extends Component {
   static defaultProps = {

@@ -10,8 +10,10 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import { withStyles } from 'react-jss';
+import styles from './styles/PaletteFormNavStyles';
+import { DRAWER_WIDTH } from './constants';
 
-const drawerWidth = 300;
+const drawerWidth = DRAWER_WIDTH;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: prop => prop !== 'open',
@@ -29,24 +31,6 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-
-const styles = {
-  root: {
-    display: 'flex',
-  },
-  navBtns: {
-    marginRight: '1rem',
-    '& a': {
-      textDecoration: 'none',
-    },
-  },
-  button: {
-    margin: '0 0.5rem',
-    '& a': {
-      textDecoration: 'none',
-    },
-  },
-};
 
 class PaletteFormNav extends Component {
   constructor(props) {
