@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 import Button from '@mui/material/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
+import { withStyles } from 'react-jss';
+
+const styles = {
+  container: {
+    width: '90%',
+  },
+  picker: {
+    width: '100% !important',
+    marginTop: '2rem',
+  },
+  colorNameInput: {
+    width: '100%',
+    height: '70px',
+  },
+};
 
 class ColorPickerForm extends Component {
   constructor(props) {
@@ -41,16 +56,23 @@ class ColorPickerForm extends Component {
     this.setState({ newColorName: '' });
   }
   render() {
-    const { paletteIsFull } = this.props;
+    const { paletteIsFull, classes } = this.props;
     const { currentColor, newColorName } = this.state;
     return (
-      <div>
-        <ChromePicker color={currentColor} onChange={this.updateCurrentColor} />
+      <div className={classes.container}>
+        <ChromePicker
+          color={currentColor}
+          onChange={this.updateCurrentColor}
+          className={classes.picker}
+        />
         <ValidatorForm onSubmit={this.handleSubmit}>
           <TextValidator
-            style={{ display: 'inline' }}
             value={newColorName}
+            className={classes.colorNameInput}
+            placeholder='Color Name'
             name='newColorName'
+            variant='filled'
+            margin='normal'
             onChange={this.handleChange}
             validators={['required', 'isColorNameUnique', 'isColorUnique']}
             errorMessages={[
@@ -58,13 +80,16 @@ class ColorPickerForm extends Component {
               'Color name must be unique',
               'Color already used',
             ]}
-            variant='filled'
           />
           <Button
             variant='contained'
             type='submit'
             disabled={paletteIsFull}
             sx={{
+              width: '100%',
+              p: '1rem',
+              mt: '1rem',
+              fontSize: '2rem',
               backgroundColor: currentColor,
               ':hover': { backgroundColor: currentColor },
             }}
@@ -77,4 +102,4 @@ class ColorPickerForm extends Component {
   }
 }
 
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);

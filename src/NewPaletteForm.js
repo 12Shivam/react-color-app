@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from './withRouter';
+import { withStyles } from 'react-jss';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import { styled } from '@mui/material/styles';
@@ -43,6 +44,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+const styles = {
+  container: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttons: {
+    width: '90%',
+  },
+  button: {
+    width: '50%',
+  },
+};
 
 class NewPaletteForm extends Component {
   static defaultProps = {
@@ -109,7 +126,7 @@ class NewPaletteForm extends Component {
   };
 
   render() {
-    const { maxColors, palettes } = this.props;
+    const { maxColors, palettes, classes } = this.props;
     const { open, colors } = this.state;
     const paletteIsFull = colors.length >= maxColors;
     return (
@@ -139,29 +156,37 @@ class NewPaletteForm extends Component {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <Typography variant='h4'>Design Your Palette</Typography>
-          <Box>
-            <Button
-              variant='contained'
-              color='error'
-              onClick={this.clearColors}
-            >
-              Clear Palette
-            </Button>
-            <Button
-              variant='contained'
-              color='primary'
-              disabled={paletteIsFull}
-              onClick={this.addRandomColor}
-            >
-              Random Color
-            </Button>
-          </Box>
-          <ColorPickerForm
-            paletteIsFull={paletteIsFull}
-            addNewColor={this.addNewColor}
-            colors={colors}
-          />
+          <div className={classes.container}>
+            <Typography variant='h5' gutterBottom>
+              Design Your Palette
+            </Typography>
+            <Box className={classes.buttons}>
+              <Button
+                variant='contained'
+                color='error'
+                size='small'
+                onClick={this.clearColors}
+                className={classes.button}
+              >
+                Clear Palette
+              </Button>
+              <Button
+                variant='contained'
+                color='primary'
+                size='small'
+                disabled={paletteIsFull}
+                onClick={this.addRandomColor}
+                className={classes.button}
+              >
+                Random Color
+              </Button>
+            </Box>
+            <ColorPickerForm
+              paletteIsFull={paletteIsFull}
+              addNewColor={this.addNewColor}
+              colors={colors}
+            />
+          </div>
         </Drawer>
         <Main open={open}>
           <DrawerHeader />
@@ -177,4 +202,4 @@ class NewPaletteForm extends Component {
   }
 }
 
-export default withRouter(NewPaletteForm);
+export default withRouter(withStyles(styles)(NewPaletteForm));
