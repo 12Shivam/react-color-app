@@ -6,6 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 
 class PaletteMetaForm extends Component {
   constructor(props) {
@@ -14,8 +16,6 @@ class PaletteMetaForm extends Component {
       open: true,
       newPaletteName: '',
     };
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
@@ -28,23 +28,19 @@ class PaletteMetaForm extends Component {
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
   }
-  handleClickOpen() {
-    this.setState({ open: true });
-  }
-  handleClose() {
-    this.setState({ open: false });
-  }
   render() {
     const { open, newPaletteName } = this.state;
+    const { hideForm, handleSubmit } = this.props;
     return (
-      <Dialog open={open} onClose={this.handleClose}>
+      <Dialog open={open} onClose={hideForm}>
         <DialogTitle>Choose a Palette Name</DialogTitle>
-        <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
+        <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
           <DialogContent>
             <DialogContentText>
               Please enter a name for your new beautiful palette. Make sure it's
               unique!
             </DialogContentText>
+            <Picker data={data} theme='light' />
 
             <TextValidator
               label='Palette Name'
@@ -59,7 +55,7 @@ class PaletteMetaForm extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>Cancel</Button>
+            <Button onClick={hideForm}>Cancel</Button>
             <Button variant='contained' color='primary' type='submit'>
               Save Palette
             </Button>
