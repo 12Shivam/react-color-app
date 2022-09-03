@@ -75,7 +75,6 @@ class PaletteFormNav extends Component {
               edge='start'
               sx={{ mr: 2, ...(open && { display: 'none' }) }}
             >
-              {/* <MenuIcon /> */}
               <AddToPhotosIcon />
             </IconButton>
             <Typography variant='h6' noWrap component='div'>

@@ -1,3 +1,5 @@
+import sizes from './sizes';
+
 const styles = {
   root: {
     display: 'flex',
@@ -7,11 +9,15 @@ const styles = {
     '& a': {
       textDecoration: 'none',
     },
+    [sizes.down('xs')]: {
+      marginRight: '0.3rem',
+    },
   },
   button: {
     margin: '0 0.5rem',
-    '& a': {
-      textDecoration: 'none',
+    [sizes.down('xs')]: {
+      margin: '0 0.2rem',
+      padding: '0.5rem',
     },
   },
 };
