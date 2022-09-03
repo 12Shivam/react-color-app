@@ -14,6 +14,13 @@ class App extends Component {
       palettes: savedPalettes || seedColors,
     };
     this.savePalette = this.savePalette.bind(this);
+    this.deletePalette = this.deletePalette.bind(this);
+  }
+  deletePalette(id) {
+    this.setState(
+      st => ({ palettes: st.palettes.filter(palette => palette.id !== id) }),
+      this.syncLocalStorage
+    );
   }
   savePalette(newPalette) {
     this.setState(
@@ -23,6 +30,7 @@ class App extends Component {
   }
   syncLocalStorage() {
     // save palettes to local storage
+    console.log(this.state.palettes);
     window.localStorage.setItem(
       'palettes',
       JSON.stringify(this.state.palettes)
@@ -33,7 +41,15 @@ class App extends Component {
     return (
       <Routes>
         <Route path='/'>
-          <Route index={true} element={<PaletteList palettes={palettes} />} />
+          <Route
+            index={true}
+            element={
+              <PaletteList
+                palettes={palettes}
+                deletePalette={this.deletePalette}
+              />
+            }
+          />
           <Route
             path='palette/new'
             element={

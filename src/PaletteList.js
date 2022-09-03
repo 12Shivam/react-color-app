@@ -10,7 +10,7 @@ class PaletteList extends Component {
     this.props.navigate(`/palette/${id}`);
   }
   render() {
-    const { palettes } = this.props;
+    const { palettes, deletePalette } = this.props;
     return (
       <Box sx={styles.root}>
         <Box sx={styles.container}>
@@ -21,9 +21,11 @@ class PaletteList extends Component {
           <Box sx={styles.palettes}>
             {palettes.map(palette => (
               <MiniPalette
-                key={palette.id}
                 {...palette}
+                key={palette.id}
+                id={palette.id}
                 handleClick={() => this.goToPalette(palette.id)}
+                handleDelete={deletePalette}
               />
             ))}
           </Box>
