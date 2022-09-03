@@ -3,12 +3,25 @@ const styles = {
     backgroundColor: 'blue',
     height: '100vh',
     display: 'flex',
+    border: '1px solid red',
+    paddingBottom: '10rem',
     alignItems: 'flex-start',
     justifyContent: 'center',
-    overflow: 'scroll',
-    scrollbarWidth: 'none',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    '&::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset O O 6px rgba(0,0,0,0.3)',
+      backgroundColor: '#0202c9',
+      borderRadius: '10px',
+    },
     '&::-webkit-scrollbar': {
-      display: 'none',
+      width: '15px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '15px',
+      backgroundColor: '#000000',
+      backgroundImage:
+        '-webkit-gradient(linear,left bottom,left top,color-stop(0.44, rgb(122,153,217)),color-stop(0.72,rgb(73,125,189)),color-stop(0.86, rgb(28,58,148)))',
     },
   },
   container: {

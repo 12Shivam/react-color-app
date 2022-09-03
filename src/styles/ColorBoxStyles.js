@@ -5,11 +5,10 @@ const style = {
   ColorBox: {
     width: '20%',
     height: props => (props.showingFullPalette ? '25%' : '50%'),
-    margin: '0 auto',
+    margin: 'auto',
     display: 'inline-block',
     position: 'relative',
     cursor: 'pointer',
-    marginBottom: '-3.5px',
     '&:hover button': {
       opacity: 1,
     },
@@ -83,6 +82,7 @@ const style = {
   copyOverlay: {
     opacity: '0',
     zIndex: '0',
+    marginTop: '-1.3rem',
     width: '100%',
     height: '100%',
     transition: 'transform 0.6s ease-in-out',

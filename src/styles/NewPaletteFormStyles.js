@@ -1,4 +1,7 @@
 const styles = {
+  root: {
+    display: 'flex',
+  },
   container: {
     height: '100%',
     display: 'flex',

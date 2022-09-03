@@ -20,7 +20,7 @@ const styles = {
       textDecoration: 'none',
       color: 'black',
     },
-    [sizes.down('sm')]: {
+    [sizes.down('xs')]: {
       display: 'none',
     },
   },

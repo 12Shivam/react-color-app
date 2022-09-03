@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { withRouter } from './withRouter';
-import { Box } from '@mui/system';
+import { Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
+import withStyles from 'react-jss';
 import styles from './styles/PaletteListStyles';
 
 class PaletteList extends Component {
@@ -10,15 +10,15 @@ class PaletteList extends Component {
     this.props.navigate(`/palette/${id}`);
   }
   render() {
-    const { palettes, deletePalette } = this.props;
+    const { palettes, deletePalette, classes } = this.props;
     return (
-      <Box sx={styles.root}>
-        <Box sx={styles.container}>
-          <Box component='nav' sx={styles.nav}>
-            <Box component='h1'>React Component</Box>
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <nav className={classes.nav}>
+            <h1>React Colors</h1>
             <Link to='/palette/new'>Create Palette</Link>
-          </Box>
-          <Box sx={styles.palettes}>
+          </nav>
+          <div className={classes.palettes}>
             {palettes.map(palette => (
               <MiniPalette
                 {...palette}
@@ -28,11 +28,11 @@ class PaletteList extends Component {
                 handleDelete={deletePalette}
               />
             ))}
-          </Box>
-        </Box>
-      </Box>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
-export default withRouter(PaletteList);
+export default withStyles(styles)(withRouter(PaletteList));

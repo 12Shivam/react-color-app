@@ -22,6 +22,7 @@ const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
     height: 'calc(100vh - 64px)',
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -40,6 +41,7 @@ const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })(
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
+  width: '100%',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -85,7 +87,6 @@ class NewPaletteForm extends Component {
     this.setState({ colors: [] });
   }
   addRandomColor() {
-    console.log(this.state.colors);
     const allColors = this.props.palettes.map(p => p.colors).flat();
     let rand = Math.floor(Math.random() * allColors.length);
     const randomColor = allColors[rand];
@@ -113,7 +114,7 @@ class NewPaletteForm extends Component {
     const { open, colors } = this.state;
     const paletteIsFull = colors.length >= maxColors;
     return (
-      <Box sx={{ display: 'flex' }}>
+      <div className={classes.root}>
         <PaletteFormNav
           open={open}
           palettes={palettes}
@@ -140,7 +141,7 @@ class NewPaletteForm extends Component {
           </DrawerHeader>
           <Divider />
           <div className={classes.container}>
-            <Typography variant='h5' gutterBottom>
+            <Typography variant='h4' gutterBottom>
               Design Your Palette
             </Typography>
             <Box className={classes.buttons}>
@@ -180,7 +181,7 @@ class NewPaletteForm extends Component {
             onSortEnd={this.onSortEnd}
           />
         </Main>
-      </Box>
+      </div>
     );
   }
 }
