@@ -7,7 +7,7 @@ import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 import seedColors from './seedColors';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './App.css';
+import Page from './Page';
 
 class App extends Component {
   constructor(props) {
@@ -43,44 +43,44 @@ class App extends Component {
     const { location } = this.props;
     return (
       <TransitionGroup component={null}>
-        <CSSTransition key={location.key} classNames='fade' timeout={500}>
+        <CSSTransition key={location.key} classNames='page' timeout={500}>
           <Routes location={location}>
             <Route
               path='/'
               element={
-                <div className='page'>
+                <Page>
                   <PaletteList
                     palettes={palettes}
                     deletePalette={this.deletePalette}
                   />
-                </div>
+                </Page>
               }
             />
             <Route
               path='/palette/new'
               element={
-                <div className='page'>
+                <Page>
                   <NewPaletteForm
                     savePalette={this.savePalette}
                     palettes={palettes}
                   />
-                </div>
+                </Page>
               }
             />
             <Route
               path='/palette/:id'
               element={
-                <div className='page'>
+                <Page>
                   <Palette palettes={palettes} />
-                </div>
+                </Page>
               }
             />
             <Route
               path='/palette/:paletteId/:colorId'
               element={
-                <div className='page'>
+                <Page>
                   <SingleColorPalette palettes={palettes} />
-                </div>
+                </Page>
               }
             />
             <Route path='*' element={<Navigate to='/' replace={true} />} />
