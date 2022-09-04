@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { withStyles } from 'react-jss';
 import { Link } from 'react-router-dom';
+
 import { styled } from '@mui/material/styles';
-import PaletteMetaForm from './PaletteMetaForm';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,9 +10,10 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import Button from '@mui/material/Button';
-import { withStyles } from 'react-jss';
-import styles from './styles/PaletteFormNavStyles';
+
 import { DRAWER_WIDTH } from './constants';
+import PaletteMetaForm from './PaletteMetaForm';
+import styles from './styles/PaletteFormNavStyles';
 
 const drawerWidth = DRAWER_WIDTH;
 
@@ -52,7 +54,9 @@ class PaletteFormNav extends Component {
     this.setState({ formShowing: false });
   }
   render() {
-    const { open, classes, palettes, handleSubmit } = this.props;
+    const { open, classes, palettes, handleSubmit, handleDrawerOpen } =
+      this.props;
+    const { formShowing } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -71,7 +75,7 @@ class PaletteFormNav extends Component {
             <IconButton
               color='inherit'
               aria-label='open drawer'
-              onClick={this.props.handleDrawerOpen}
+              onClick={handleDrawerOpen}
               edge='start'
               sx={{ mr: 2, ...(open && { display: 'none' }) }}
             >
@@ -103,7 +107,7 @@ class PaletteFormNav extends Component {
             </Button>
           </div>
         </AppBar>
-        {this.state.formShowing && (
+        {formShowing && (
           <PaletteMetaForm
             palettes={palettes}
             handleSubmit={handleSubmit}

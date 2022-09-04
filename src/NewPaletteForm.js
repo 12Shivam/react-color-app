@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from './withRouter';
 import { withStyles } from 'react-jss';
-import PaletteFormNav from './PaletteFormNav';
-import ColorPickerForm from './ColorPickerForm';
+import { arrayMove } from 'react-sortable-hoc';
 import { styled } from '@mui/material/styles';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
@@ -11,10 +11,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Button from '@mui/material/Button';
-import DraggableColorList from './DraggableColorList';
-import { arrayMove } from 'react-sortable-hoc';
-import styles from './styles/NewPaletteFormStyles';
+
 import { DRAWER_WIDTH } from './constants';
+import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
+import DraggableColorList from './DraggableColorList';
+
+import styles from './styles/NewPaletteFormStyles';
 
 const drawerWidth = DRAWER_WIDTH;
 

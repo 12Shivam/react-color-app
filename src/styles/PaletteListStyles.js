@@ -63,6 +63,7 @@ const styles = {
       color: 'white',
       textUnderlineOffset: '6px',
     },
+    filter: 'drop-shadow(2.5px 2.5px 9px #0ebfff)',
   },
   palettes: {
     boxSizing: 'border-box',
