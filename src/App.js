@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from './withRouter';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 import seedColors from './seedColors';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -37,37 +40,55 @@ class App extends Component {
   }
   render() {
     const { palettes } = this.state;
+    const { location } = this.props;
     return (
-      <Routes>
-        <Route path='/'>
-          <Route
-            index={true}
-            element={
-              <PaletteList
-                palettes={palettes}
-                deletePalette={this.deletePalette}
-              />
-            }
-          />
-          <Route
-            path='palette/new'
-            element={
-              <NewPaletteForm
-                savePalette={this.savePalette}
-                palettes={palettes}
-              />
-            }
-          />
-          <Route path='palette/:id' element={<Palette palettes={palettes} />} />
-          <Route
-            path='palette/:paletteId/:colorId'
-            element={<SingleColorPalette palettes={palettes} />}
-          />
-        </Route>
-        <Route path='*' element={<Navigate to='/' replace={true} />} />
-      </Routes>
+      <TransitionGroup component={null}>
+        <CSSTransition key={location.key} classNames='fade' timeout={500}>
+          <Routes location={location}>
+            <Route
+              path='/'
+              element={
+                <div className='page'>
+                  <PaletteList
+                    palettes={palettes}
+                    deletePalette={this.deletePalette}
+                  />
+                </div>
+              }
+            />
+            <Route
+              path='/palette/new'
+              element={
+                <div className='page'>
+                  <NewPaletteForm
+                    savePalette={this.savePalette}
+                    palettes={palettes}
+                  />
+                </div>
+              }
+            />
+            <Route
+              path='/palette/:id'
+              element={
+                <div className='page'>
+                  <Palette palettes={palettes} />
+                </div>
+              }
+            />
+            <Route
+              path='/palette/:paletteId/:colorId'
+              element={
+                <div className='page'>
+                  <SingleColorPalette palettes={palettes} />
+                </div>
+              }
+            />
+            <Route path='*' element={<Navigate to='/' replace={true} />} />
+          </Routes>
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
