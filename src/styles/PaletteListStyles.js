@@ -1,11 +1,13 @@
 import sizes from './sizes';
+import bg from './bg.svg';
 
 const styles = {
   root: {
-    backgroundColor: 'blue',
+    /* background by SVGBackgrounds.com */
+    backgroundColor: '#350EAA',
+    backgroundImage: `url(${bg})`,
     height: '100vh',
     display: 'flex',
-    border: '1px solid red',
     paddingBottom: '10rem',
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -13,7 +15,7 @@ const styles = {
     overflowY: 'auto',
     '&::-webkit-scrollbar-track': {
       '-webkit-box-shadow': 'inset O O 6px rgba(0,0,0,0.3)',
-      backgroundColor: '#0202c9',
+      backgroundColor: '#350EAA',
       borderRadius: '10px',
     },
     '&::-webkit-scrollbar': {
@@ -25,6 +27,9 @@ const styles = {
       backgroundImage:
         '-webkit-gradient(linear,left bottom,left top,color-stop(0.44, rgb(122,153,217)),color-stop(0.72,rgb(73,125,189)),color-stop(0.86, rgb(28,58,148)))',
     },
+  },
+  heading: {
+    fontSize: '2rem',
   },
   container: {
     width: '50%',
@@ -61,7 +66,7 @@ const styles = {
     },
     [sizes.down('xs')]: {
       gridTemplateColumns: 'repeat(1, 100%)',
-      gridGap: '1rem',
+      gridGap: '1.4rem',
     },
   },
 };
