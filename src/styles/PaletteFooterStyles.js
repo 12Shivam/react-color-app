@@ -2,8 +2,7 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   PaletteFooter: {
-    border: '1px solid red',
-    backgroundColor: 'white',
+    backgroundColor: '#eceff1',
     height: '5vh',
     display: 'flex',
     justifyContent: 'flex-end',
